@@ -1,8 +1,13 @@
 import React from 'react'
+import StickyTop from './StickyTop'
+import Nav from './Nav'
 
 const Navbar = () => {
   return (
-    <div>Navbar</div>
+    <div className='z-10'>
+      <StickyTop />
+      <Nav/>
+    </div>
   )
 }
 
