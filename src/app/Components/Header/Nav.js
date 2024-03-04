@@ -1,14 +1,17 @@
 'use client'
 
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
-import { MdKeyboardArrowDown } from "react-icons/md";
-import { VscAccount } from "react-icons/vsc";
-import { CiSearch } from "react-icons/ci";
-import styled from "styled-components";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { MdKeyboardArrowDown } from 'react-icons/md';
+import { VscAccount } from 'react-icons/vsc';
+import { CiSearch } from 'react-icons/ci';
+import styled from 'styled-components';
 
 const NavContainer = styled.div`
+  position: relative;
+  z-index: 1000; /* Ensure the navbar stays on top of other content */
+  transition: top 0.3s ease; /* Add smooth transition when changing position */
   @media (min-width: 640px) {
     justify-content: center;
   }
@@ -22,6 +25,15 @@ const NavContainer = styled.div`
     display: flex;
     justify-content: space-around;
   }
+
+  /* Sticky class */
+  &.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow when sticky */
+  }
 `;
 
 const List = styled.li`
@@ -31,7 +43,7 @@ const List = styled.li`
   }
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -52,25 +64,15 @@ const SubMenu = styled.div`
   border: 1px solid #ccc;
   min-width: 170px;
   z-index: 999;
-  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   flex-direction: column;
   gap: 10px;
 `;
 
 const Nav = () => {
+  const [isSticky, setIsSticky] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [subMenuIndex, setSubMenuIndex] = useState(null);
-
-  const handleSubMenuToggle = (index) => {
-    setIsOpen(!isOpen);
-    setSubMenuIndex(index);
-  };
-
-  const handleSubMenuClose = () => {
-    setIsOpen(false);
-    setSubMenuIndex(null);
-  };
-
   const navItems = [
     {
       name: "SS'24 Collection",
@@ -117,8 +119,34 @@ const Nav = () => {
     },
   ];
 
+    const handleSubMenuToggle = (index) => {
+    setIsOpen(!isOpen);
+    setSubMenuIndex(index);
+  };
+
+  const handleSubMenuClose = () => {
+    setIsOpen(false);
+    setSubMenuIndex(null);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <NavContainer className="sm:flex-row items-center px-4 py-5 lg:px-0 py-11 justify-around flex flex-col">
+    <NavContainer className={`sm:flex-row items-center px-4 py-5 bg-[#eeedeb] lg:px-0 py-11 flex flex-col ${isSticky ? 'sticky' : ''}`}>
       <Link href="/">
         <Image
           src="https://desiminimals.com/cdn/shop/files/dm_full_1_shopify_black_ss24.png?v=1708239740&width=110"
@@ -140,11 +168,11 @@ const Nav = () => {
                 href={nav.link}
                 className="flex justify-center items-center gap-3"
               >
-                {nav.name}{" "}
+                {nav.name}{' '}
                 {nav.submenu.length > 0 && (
                   <span className="">
-                    {" "}
-                    <MdKeyboardArrowDown fontSize={25} />{" "}
+                    {' '}
+                    <MdKeyboardArrowDown fontSize={25} />{' '}
                   </span>
                 )}
               </Link>
@@ -174,3 +202,6 @@ const Nav = () => {
 };
 
 export default Nav;
+
+
+
