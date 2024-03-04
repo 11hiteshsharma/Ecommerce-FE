@@ -18,7 +18,7 @@ const NavContainer = styled.div`
   }
 
   @media (min-width: 1024px) {
-    padding: 40px;
+    padding: 50px 80px;
     display: flex;
     justify-content: space-around;
   }
@@ -118,7 +118,7 @@ const Nav = () => {
   ];
 
   return (
-    <NavContainer className="px-4 py-5 lg:px-0 py-11 justify-around flex flex-col sm:flex-row items-center">
+    <NavContainer className="sm:flex-row items-center px-4 py-5 lg:px-0 py-11 justify-around flex flex-col">
       <Link href="/">
         <Image
           src="https://desiminimals.com/cdn/shop/files/dm_full_1_shopify_black_ss24.png?v=1708239740&width=110"

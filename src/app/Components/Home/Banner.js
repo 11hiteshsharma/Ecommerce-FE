@@ -38,7 +38,7 @@ function BannerSlider() {
     // cssEase: "linear",
   };
   return (
-    <SliderContainer className="slider-container h-[850px]">
+    <SliderContainer className="slider-container sm:h-[550px] lg: h-[850px]">
       <Slider {...settings}>
         {bannerData.map((data) => (
           <BannerCard key={data.id} data={data} />
