@@ -1,14 +1,14 @@
-import React from 'react'
-import StickyTop from './StickyTop'
-import Nav from './Nav'
+import React from "react";
+import StickyTop from "./StickyTop";
+import Nav from "./Nav";
 
 const Navbar = () => {
-  return (
-    <div className='z-10'>
-      <StickyTop />
-      <Nav/>
-    </div>
-  )
-}
+	return (
+		<header className="z-10">
+			<StickyTop />
+			<Nav />
+		</header>
+	);
+};
 
-export default Navbar
+export default Navbar;
