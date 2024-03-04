@@ -1,29 +1,41 @@
 // CategoryCard.jsx
-import Image from 'next/image';
-import React from 'react';
-import styled from 'styled-components';
+import Link from "next/link";
+import React from "react";
+import styled from "styled-components";
 
 const CardContainer = styled.div`
   position: relative;
   max-width: 275px;
-  max-height: 275px;
+  height: 275px;
+  border-radius: 30px;
+  overflow: hidden;
+`;
 
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const CardText = styled.p`
   position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 8px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   text-align: center;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 800;
 `;
 
 const CategoryCard = ({ data }) => {
   return (
     <CardContainer>
-      <Image src={data.imageUrl} alt={data.name} className='relative' width={275} height={275}/>
-      <CardText>{data.name}</CardText>
+      <Link href={data.url}>
+        <Image src={data.imageUrl} alt={data.name} />
+        <CardText>{data.name}</CardText>
+      </Link>
     </CardContainer>
   );
 };
