@@ -1,8 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ['desiminimals.com',"images.pexels.com"],
-  },
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "desiminimals.com",
+				pathname: "**",
+			},
+			{
+				protocol: "https",
+				hostname: "images.pexels.com",
+				pathname: "**",
+			},
+		],
+	},
 };
 
 export default nextConfig;
