@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { MdKeyboardArrowDown } from 'react-icons/md';
-import { VscAccount } from 'react-icons/vsc';
-import { CiSearch } from 'react-icons/ci';
-import styled from 'styled-components';
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { VscAccount } from "react-icons/vsc";
+import { CiSearch } from "react-icons/ci";
+import styled from "styled-components";
 
 const NavContainer = styled.div`
   position: relative;
@@ -33,6 +33,7 @@ const NavContainer = styled.div`
     left: 0;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow when sticky */
+    padding: 30px 0;
   }
 `;
 
@@ -43,7 +44,7 @@ const List = styled.li`
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -64,7 +65,7 @@ const SubMenu = styled.div`
   border: 1px solid #ccc;
   min-width: 170px;
   z-index: 999;
-  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
   flex-direction: column;
   gap: 10px;
 `;
@@ -119,7 +120,7 @@ const Nav = () => {
     },
   ];
 
-    const handleSubMenuToggle = (index) => {
+  const handleSubMenuToggle = (index) => {
     setIsOpen(!isOpen);
     setSubMenuIndex(index);
   };
@@ -131,22 +132,26 @@ const Nav = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 200) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <NavContainer className={`sm:flex-row items-center px-4 py-5 bg-[#eeedeb] lg:px-0 py-11 flex flex-col ${isSticky ? 'sticky' : ''}`}>
+    <NavContainer
+      className={`sm:flex-row items-center px-4 bg-[#eeedeb] lg:px-0 py-11 flex flex-col ${
+        isSticky ? "sticky lg: py-8" : ""
+      }`}
+    >
       <Link href="/">
         <Image
           src="https://desiminimals.com/cdn/shop/files/dm_full_1_shopify_black_ss24.png?v=1708239740&width=110"
@@ -168,11 +173,11 @@ const Nav = () => {
                 href={nav.link}
                 className="flex justify-center items-center gap-3"
               >
-                {nav.name}{' '}
+                {nav.name}{" "}
                 {nav.submenu.length > 0 && (
                   <span className="">
-                    {' '}
-                    <MdKeyboardArrowDown fontSize={25} />{' '}
+                    {" "}
+                    <MdKeyboardArrowDown fontSize={25} />{" "}
                   </span>
                 )}
               </Link>
@@ -202,6 +207,3 @@ const Nav = () => {
 };
 
 export default Nav;
-
-
-
