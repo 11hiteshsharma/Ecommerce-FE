@@ -33,6 +33,7 @@ const NavContainer = styled.div`
     left: 0;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow when sticky */
+    padding: 30px 0;
   }
 `;
 
@@ -131,7 +132,7 @@ const Nav = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 200) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
@@ -148,7 +149,7 @@ const Nav = () => {
   return (
     <NavContainer
       className={`sm:flex-row items-center px-4 bg-[#eeedeb] lg:px-0 py-11 flex flex-col ${
-        isSticky ? "sticky" : ""
+        isSticky ? "sticky lg: py-8" : ""
       }`}
     >
       <Link href="/">

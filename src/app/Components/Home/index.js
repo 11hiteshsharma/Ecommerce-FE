@@ -14,7 +14,7 @@ const HomePage = () => {
         <CategoriesCards />
       </div>
 
-      <div>
+      <div className="pv-[90px]">
         <VideoContainer />
       </div>
     </div>
