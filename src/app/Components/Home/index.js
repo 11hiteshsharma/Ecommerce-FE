@@ -2,6 +2,7 @@ import React from "react";
 import BannerSlider from "./Banner";
 import CategoriesCards from "./CategorySection";
 import VideoContainer from "./VideoContainer";
+import ProductSection from "./ProductSection";
 
 const HomePage = () => {
   return (
@@ -14,8 +15,12 @@ const HomePage = () => {
         <CategoriesCards />
       </div>
 
-      <div className="pv-[90px]">
+      <div className="pt-[50px]">
         <VideoContainer />
+      </div>
+
+      <div className="p-[90px]">
+        <ProductSection />
       </div>
     </div>
   );
