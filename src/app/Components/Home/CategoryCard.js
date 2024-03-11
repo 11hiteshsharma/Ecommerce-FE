@@ -51,10 +51,10 @@ const CategoryCard = ({ data }) => {
 
   // Define animation values based on scroll position
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1.2]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  // const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
 
   return (
-    <CardContainer style={{ opacity, scale }}>
+    <CardContainer style={{ opacity }}>
       <Link href={data.url}>
         <Image
           src={data.imageUrl}

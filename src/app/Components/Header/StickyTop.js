@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const StickyTop = () => {
   return (
-    <Wrapper className="decoration-[#eeedeb] bg-[#3c3633] text-center py-2">
+    <Wrapper className="bg-[#3c3633] text-center py-2">
       avail 15% off on all orders above ₹3500, use code - PY15
     </Wrapper>
   );
