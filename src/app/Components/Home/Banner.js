@@ -53,7 +53,7 @@ export default BannerSlider;
 
 const SliderContainer = styled.div`
   .slick-track {
-    height: 500px;
+    height: 100%;
   }
   .slick-dots {
     bottom: 20px;
