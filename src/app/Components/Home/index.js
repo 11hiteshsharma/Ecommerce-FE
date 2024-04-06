@@ -1,10 +1,11 @@
+"use client";
 import React from "react";
 import BannerSlider from "./Banner";
 import CategoriesCards from "./CategorySection";
 import VideoContainer from "./VideoContainer";
 import ProductSection from "./ProductSection";
 
-const HomePage = () => {
+const HomePage = ({ data }) => {
   return (
     <div>
       <div className="">
@@ -19,8 +20,8 @@ const HomePage = () => {
         <VideoContainer />
       </div>
 
-      <div className="p-[90px]">
-        <ProductSection />
+      <div className="pt-[90px]">
+        <ProductSection data={data} />
       </div>
     </div>
   );
