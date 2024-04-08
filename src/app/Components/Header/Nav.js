@@ -7,6 +7,8 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
 import { CiSearch } from "react-icons/ci";
 import styled from "styled-components";
+import { IoCartOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 const NavContainer = styled.div`
   position: relative;
@@ -146,6 +148,9 @@ const Nav = () => {
     };
   }, []);
 
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const itemsInCart = cartItems.length;
+
   return (
     <NavContainer
       className={`sm:flex-row items-center px-4 bg-[#eeedeb] lg:px-0 py-11 flex flex-col ${
@@ -200,6 +205,16 @@ const Nav = () => {
         </Link>
         <Link href="/search">
           <CiSearch fontSize={25} />
+        </Link>
+        <Link href="/cart">
+          <div className="relative">
+            <IoCartOutline className="text-3xl cursor-pointer" />
+            {itemsInCart > 0 && (
+              <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
+                {itemsInCart}
+              </span>
+            )}
+          </div>
         </Link>
       </div>
     </NavContainer>
