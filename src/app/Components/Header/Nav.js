@@ -8,7 +8,8 @@ import { VscAccount } from "react-icons/vsc";
 import { CiSearch } from "react-icons/ci";
 import styled from "styled-components";
 import { IoCartOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setCartItems } from "@/lib/Features/Cart/cartSlice";
 
 const NavContainer = styled.div`
   position: relative;
@@ -76,6 +77,7 @@ const Nav = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [subMenuIndex, setSubMenuIndex] = useState(null);
+  const dispatch = useDispatch();
   const navItems = [
     {
       name: "SS'24 Collection",
@@ -150,6 +152,14 @@ const Nav = () => {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsInCart = cartItems.length;
+
+  useEffect(() => {
+    const cartData = JSON.parse(localStorage.getItem("cart"));
+    console.log(cartData, "CartData");
+    if (cartData) {
+      dispatch(setCartItems(cartData));
+    }
+  }, []);
 
   return (
     <NavContainer

@@ -13,12 +13,12 @@ const ProductCard = ({ title, image, price, id }) => {
             alt=""
             layout="fill"
             objectFit="contain"
-            className="h-full w-full aspect-[9/16]"
+            className="h-full w-full aspect-[9/16] mix-blend-multiply"
           />
         </ImageContainer>
         <BottomSection>
           <ProductName>{title}</ProductName>
-          <Price>₹ {price}</Price>
+          <Price>$ {price}</Price>
         </BottomSection>
       </CardContainer>
     </Link>

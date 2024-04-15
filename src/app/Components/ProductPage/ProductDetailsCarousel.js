@@ -44,7 +44,12 @@ const ProductDetailsCarousel = ({ image }) => {
         className="productCarousel flex flex-row-reverse"
       >
         {images.map((img) => (
-          <img key={img?.id} src={img?.url} alt="" />
+          <img
+            key={img?.id}
+            src={img?.url}
+            alt=""
+            className="mix-blend-multiply"
+          />
         ))}
       </Carousel>
     </div>

@@ -12,7 +12,7 @@ import RemoveFromCart from "./RemoveFromCart";
 
 const SingleProductPage = ({ data }) => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItems); // Assuming your cart state structure
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const isInCart = cartItems.some((item) => item.id === data.id);
 
@@ -23,6 +23,7 @@ const SingleProductPage = ({ data }) => {
         title: data.title,
         price: data.price,
         quantity: 1,
+        image: data.image,
       })
     );
   };
@@ -34,7 +35,6 @@ const SingleProductPage = ({ data }) => {
       })
     );
   };
-
   return (
     <div className="flex px-10 gap-8">
       <ProductDetailsCarousel image={data.image} />
