@@ -10,6 +10,8 @@ import styled from "styled-components";
 import { IoCartOutline } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { setCartItems } from "@/lib/Features/Cart/cartSlice";
+import SearchBar from "react-ai-search-bar";
+import "react-ai-search-bar/dist/index.css";
 
 const NavContainer = styled.div`
   position: relative;
@@ -77,6 +79,8 @@ const Nav = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [subMenuIndex, setSubMenuIndex] = useState(null);
+  const [aiSearch, setAiSearch] = useState(false);
+
   const dispatch = useDispatch();
   const navItems = [
     {
@@ -161,74 +165,91 @@ const Nav = () => {
     }
   }, []);
 
+  const handleSearchClick = () => {
+    setAiSearch(!aiSearch);
+  };
+
   return (
-    <NavContainer
-      className={`sm:flex-row items-center px-4 bg-[#eeedeb] lg:px-0 py-11 flex flex-col ${
-        isSticky ? "sticky lg: py-8" : ""
-      }`}
-    >
-      <Link href="/">
-        <Image
-          src="https://desiminimals.com/cdn/shop/files/dm_full_1_shopify_black_ss24.png?v=1708239740&width=110"
-          alt="Desi Minimals"
-          width={110}
-          height={110}
-        />
-      </Link>
-      <div className="hidden md:block">
-        <ul className="flex gap-8 text-lg flex-wrap items-center justify-center">
-          {navItems.map((nav, index) => (
-            <List
-              key={nav.name}
-              className="line relative"
-              onMouseEnter={() => handleSubMenuToggle(index)}
-              onMouseLeave={handleSubMenuClose}
-            >
-              <Link
-                href={nav.link}
-                className="flex justify-center items-center gap-3"
+    <>
+      <NavContainer
+        className={`sm:flex-row items-center px-4 bg-[#eeedeb] lg:px-0 py-11 flex flex-col ${
+          isSticky ? "sticky lg: py-8" : ""
+        }`}
+      >
+        <Link href="/">
+          <Image
+            src="https://desiminimals.com/cdn/shop/files/dm_full_1_shopify_black_ss24.png?v=1708239740&width=110"
+            alt="Desi Minimals"
+            width={110}
+            height={110}
+          />
+        </Link>
+        <div className="hidden md:block">
+          <ul className="flex gap-8 text-lg flex-wrap items-center justify-center">
+            {navItems.map((nav, index) => (
+              <List
+                key={nav.name}
+                className="line relative"
+                onMouseEnter={() => handleSubMenuToggle(index)}
+                onMouseLeave={handleSubMenuClose}
               >
-                {nav.name}{" "}
-                {nav.submenu.length > 0 && (
-                  <span className="">
-                    {" "}
-                    <MdKeyboardArrowDown fontSize={25} />{" "}
-                  </span>
+                <Link
+                  href={nav.link}
+                  className="flex justify-center items-center gap-3"
+                >
+                  {nav.name}{" "}
+                  {nav.submenu.length > 0 && (
+                    <span className="">
+                      {" "}
+                      <MdKeyboardArrowDown fontSize={25} />{" "}
+                    </span>
+                  )}
+                </Link>
+                {nav.submenu.length > 0 && subMenuIndex === index && (
+                  <SubMenu isOpen={isOpen}>
+                    {nav.submenu.map((sub) => (
+                      <Link key={sub.link} href={sub.link}>
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </SubMenu>
                 )}
-              </Link>
-              {nav.submenu.length > 0 && subMenuIndex === index && (
-                <SubMenu isOpen={isOpen}>
-                  {nav.submenu.map((sub) => (
-                    <Link key={sub.link} href={sub.link}>
-                      {sub.name}
-                    </Link>
-                  ))}
-                </SubMenu>
+              </List>
+            ))}
+          </ul>
+        </div>
+        <div className="hidden md:flex gap-7">
+          <Link href="/account">
+            <VscAccount fontSize={25} />
+          </Link>
+          <CiSearch
+            fontSize={25}
+            onClick={handleSearchClick}
+            className="cursor-pointer"
+          />
+          <Link href="/cart">
+            <div className="relative">
+              <IoCartOutline className="text-3xl cursor-pointer" />
+              {itemsInCart > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
+                  {itemsInCart}
+                </span>
               )}
-            </List>
-          ))}
-        </ul>
-      </div>
-      <div className="hidden md:flex gap-7">
-        <Link href="/account">
-          <VscAccount fontSize={25} />
-        </Link>
-        <Link href="/search">
-          <CiSearch fontSize={25} />
-        </Link>
-        <Link href="/cart">
-          <div className="relative">
-            <IoCartOutline className="text-3xl cursor-pointer" />
-            {itemsInCart > 0 && (
-              <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
-                {itemsInCart}
-              </span>
-            )}
-          </div>
-        </Link>
-      </div>
-    </NavContainer>
+            </div>
+          </Link>
+        </div>
+      </NavContainer>
+      {aiSearch ? (
+        <AISearchBar>
+          <SearchBar />
+        </AISearchBar>
+      ) : null}
+    </>
   );
 };
 
 export default Nav;
+
+const AISearchBar = styled.div`
+  padding: 40px;
+`;
