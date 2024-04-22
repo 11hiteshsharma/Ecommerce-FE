@@ -12,7 +12,7 @@ const CartCard = ({
         <img
           src={item.image}
           alt={item.name}
-          className="w-full h-32 object-cover mb-2"
+          className="w-full h-32 object-contain mb-2"
         />
         <div>
           <h3 className="text-lg font-semibold">{item.name}</h3>
